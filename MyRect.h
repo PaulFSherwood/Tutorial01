@@ -6,6 +6,9 @@
 class MyRect: public QGraphicsRectItem {
 public:
     void keyPressEvent(QKeyEvent * event);
+private:
+    bool LEFT = false;
+    bool RIGHT = false;
 };
 
 #endif // MYRECT_H

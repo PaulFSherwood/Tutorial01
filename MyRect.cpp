@@ -10,11 +10,17 @@ void MyRect::keyPressEvent(QKeyEvent *event)
     // qDebug() << "MyRect knows you pressed a gkey" << endl;
     if(event->key() == Qt::Key_Left)
     {
-        setPos(x()-10, y());
+        // set LEFT movement to true
+        LEFT = true;
+    } else {
+        LEFT = false;
     }
     if(event->key() == Qt::Key_Right)
     {
-        setPos(x()+10, y());
+        // set Right movement to true
+        RIGHT = true;
+    } else {
+        RIGHT = false;
     }
     if(event->key() == Qt::Key_Space)
     {
@@ -22,5 +28,13 @@ void MyRect::keyPressEvent(QKeyEvent *event)
         Bullet * bullet = new Bullet();
         bullet->setPos(x(), y());
         scene()->addItem(bullet);
+    }
+
+
+    if (LEFT) {
+        setPos(x()-10, y());
+    }
+    if (RIGHT) {
+        setPos(x()+10, y());
     }
 }
