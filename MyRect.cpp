@@ -2,6 +2,7 @@
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include "bullet.h"
+#include "enemy.h"
 
 #include "QDebug"
 
@@ -32,9 +33,22 @@ void MyRect::keyPressEvent(QKeyEvent *event)
 
 
     if (LEFT) {
-        setPos(x()-10, y());
+        if (pos().x() > 0){
+            setPos(x()-10, y());
+        }
+
     }
     if (RIGHT) {
-        setPos(x()+10, y());
+        if (pos().x() + 100 < 800){
+            setPos(x()+10, y());
+        }
+
     }
+}
+
+void MyRect::spawn(){
+    // create an enemy
+    Enemy * enemy = new Enemy();
+    scene()->addItem(enemy);
+
 }
