@@ -1,5 +1,7 @@
 #include "bullet.h"
 #include <QTimer>
+#include <QGraphicsScene>
+#include <QDebug>
 
 Bullet::Bullet()
 {   // draw the rect
@@ -16,4 +18,9 @@ void Bullet::move()
 {
     // move bullet up
     setPos(x() , y()-10);
+    if (pos().y()+rect().height() < 0){
+        scene()->removeItem(this);
+        delete this;
+        qDebug() << "Bullet deelte";
+    }
 }
