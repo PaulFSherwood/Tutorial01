@@ -12,7 +12,8 @@
  * -QGraphicsView
  * =====================================================
  * events (kePressEvent(0 and QKeyEvent)
- * event propogation system
+ * event propogation system (the order that event is pass
+ *                           ed around)
  * QDebug
  * =====================================================
  * QTimer
