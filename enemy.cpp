@@ -23,12 +23,17 @@ Enemy::Enemy() : QObject(), QGraphicsRectItem()
 
 void Enemy::move()
 {
-    // move Enemy up
+    // move Enemy down
     setPos(x() , y()+5);
+
+    if (y() > 600) {
+        scene()->removeItem(this);
+        delete this;
+        return;
+    }
     if (pos().y()+rect().height() < 0)
     {
         scene()->removeItem(this);
         delete this;
-        qDebug() << "Enemy delete";
     }
 }

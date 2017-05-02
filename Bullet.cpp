@@ -33,9 +33,13 @@ void Bullet::move()
     }
     // move bullet up
     setPos(x() , y()-10);
+    if (y() < -10) {
+        scene()->removeItem(this);
+        delete this;
+        return;
+    }
     if (pos().y()+rect().height() < 0){
         scene()->removeItem(this);
         delete this;
-        qDebug() << "Bullet deelte";
     }
 }
