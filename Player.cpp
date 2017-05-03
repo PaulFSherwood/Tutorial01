@@ -1,12 +1,17 @@
-#include "MyRect.h"
 #include <QGraphicsScene>
 #include <QKeyEvent>
+#include "Player.h"
 #include "bullet.h"
 #include "enemy.h"
 
 #include "QDebug"
 
-void MyRect::keyPressEvent(QKeyEvent *event)
+Player::Player(QGraphicsItem *parent): QGraphicsRectItem(parent){
+
+}
+
+
+void Player::keyPressEvent(QKeyEvent *event)
 {
     // qDebug() << "MyRect knows you pressed a gkey" << endl;
     if(event->key() == Qt::Key_Left)
@@ -46,7 +51,7 @@ void MyRect::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void MyRect::spawn(){
+void Player::spawn(){
     // create an enemy
     Enemy * enemy = new Enemy();
     scene()->addItem(enemy);

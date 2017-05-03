@@ -1,12 +1,14 @@
-#ifndef MYRECT_H
-#define MYRECT_H
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include <QGraphicsRectItem>
 #include <QObject>
+#include <QGraphicsItem>
 
-class MyRect : public QObject, public QGraphicsRectItem {
+class Player:public QObject, public QGraphicsRectItem{
     Q_OBJECT
 public:
+    Player(QGraphicsItem * parent=0);
     void keyPressEvent(QKeyEvent * event);
 public slots:
     void spawn();
@@ -15,4 +17,4 @@ private:
     bool RIGHT = false;
 };
 
-#endif // MYRECT_H
+#endif // PLAYER_H
