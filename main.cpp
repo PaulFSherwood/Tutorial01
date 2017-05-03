@@ -1,8 +1,9 @@
 #include <QApplication>
 #include <QGraphicsScene>
-#include "MyRect.h"
 #include <QGraphicsView>
 #include <QTimer>
+#include "MyRect.h"
+#include "Game.h"
 
 /*
  * Basic knowledge of c++ (pointer and memory management
@@ -21,9 +22,18 @@
  * signals and slots (connect function)
  * QObject and Q_OBJECT macro
  */
+/*
+ * -parents
+ * -QGraphicsTextItem, setPlainText(), setFont(), setDefaultTextColor()
+ */
+Game * game;
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    game = new Game();
+    game->show();
 
     // Create a scene
     QGraphicsScene * scene = new QGraphicsScene();
