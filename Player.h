@@ -12,9 +12,6 @@ public:
     void keyPressEvent(QKeyEvent * event);
 public slots:
     void spawn();
-private:
-    bool LEFT = false;
-    bool RIGHT = false;
 };
 
 #endif // PLAYER_H

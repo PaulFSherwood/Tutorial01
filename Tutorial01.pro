@@ -28,11 +28,13 @@ SOURCES += main.cpp \
     enemy.cpp \
     score.cpp \
     game.cpp \
-    Player.cpp
+    Player.cpp \
+    health.cpp
 
 HEADERS  += \
     bullet.h \
     enemy.h \
     score.h \
     game.h \
-    Player.h
+    Player.h \
+    health.h

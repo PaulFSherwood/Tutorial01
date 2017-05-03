@@ -1,8 +1,4 @@
 #include <QApplication>
-#include <QGraphicsScene>
-#include <QGraphicsView>
-#include <QTimer>
-#include "Player.h"
 #include "Game.h"
 
 /*
@@ -26,10 +22,10 @@
  * -parents
  * -QGraphicsTextItem, setPlainText(), setFont(), setDefaultTextColor()
  */
+
 Game * game;
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
     QApplication a(argc, argv);
 
     game = new Game();

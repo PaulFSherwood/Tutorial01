@@ -3,15 +3,12 @@
 
 #include <QGraphicsRectItem>
 #include <QObject>
+#include <QGraphicsItem>
 
-class Enemy : public QObject, public QGraphicsRectItem
-{
+class Enemy: public QObject,public QGraphicsRectItem{
     Q_OBJECT
 public:
-    Enemy();
-
-signals:
-
+    Enemy(QGraphicsItem * parent=0);
 public slots:
     void move();
 };

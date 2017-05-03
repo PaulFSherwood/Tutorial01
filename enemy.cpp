@@ -1,38 +1,37 @@
-#include "enemy.h"
+#include "Enemy.h"
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QList>
-#include <QDebug>
-#include <QObject>
-#include <stdlib.h>
+#include <stdlib.h> // rand() -> really large int
+#include "Game.h"
 
-Enemy::Enemy() : QObject(), QGraphicsRectItem()
-{
-    // Set random position
+extern Game * game;
+
+Enemy::Enemy(QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent){
+    //set random x position
     int random_number = rand() % 700;
-    setPos(random_number, 0);
-    // draw the rect
-    setRect(0, 0, 100, 100);
+    setPos(random_number,0);
 
-    // connect
-    QTimer * timer = new QTimer();
-    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
+    // drew the rect
+    setRect(0,0,100,100);
 
+    // make/connect a timer to move() the enemy every so often
+    QTimer * timer = new QTimer(this);
+    connect(timer,SIGNAL(timeout()),this,SLOT(move()));
+
+    // start the timer
     timer->start(50);
 }
 
-void Enemy::move()
-{
-    // move Enemy down
-    setPos(x() , y()+5);
+void Enemy::move(){
+    // move enemy down
+    setPos(x(),y()+5);
 
-    if (y() > 600) {
-        scene()->removeItem(this);
-        delete this;
-        return;
-    }
-    if (pos().y()+rect().height() < 0)
-    {
+    // destroy enemy when it goes out of the screen
+    if (pos().y() > 600){
+        //decrease the health
+        game->health->decrease();
+
         scene()->removeItem(this);
         delete this;
     }

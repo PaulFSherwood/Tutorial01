@@ -4,18 +4,17 @@
 #include <QFont>
 #include "Enemy.h"
 
-Game::Game(QWidget * parent)
-{
-    // create the screne
+Game::Game(QWidget *parent){
+    // create the scene
     scene = new QGraphicsScene();
-    scene->setSceneRect(0, 0, 800, 600);  // make the screen 800x600
+    scene->setSceneRect(0,0,800,600); // make the scene 800x600 instead of infinity by infinity (default)
 
-    // make the newly created sceen to the scene visualize
+    // make the newly created scene the scene to visualize (since Game is a QGraphicsView Widget,
+    // it can be used to visualize scenes)
     setScene(scene);
-
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFixedSize(800, 600);
+    setFixedSize(800,600);
 
     // create the player
     player = new Player();
@@ -34,9 +33,9 @@ Game::Game(QWidget * parent)
     health->setPos(health->x(),health->y()+25);
     scene->addItem(health);
 
-    // Spawn enemies
+    // spawn enemies
     QTimer * timer = new QTimer();
-    QObject::connect(timer, SIGNAL(timeout()), player, SLOT(spawn()));
+    QObject::connect(timer,SIGNAL(timeout()),player,SLOT(spawn()));
     timer->start(2000);
 
     show();

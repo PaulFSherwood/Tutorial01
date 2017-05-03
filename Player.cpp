@@ -1,53 +1,29 @@
+#include "Player.h"
 #include <QGraphicsScene>
 #include <QKeyEvent>
-#include "Player.h"
-#include "bullet.h"
-#include "enemy.h"
-
-#include "QDebug"
+#include "Bullet.h"
+#include "Enemy.h"
 
 Player::Player(QGraphicsItem *parent): QGraphicsRectItem(parent){
 
 }
 
-
-void Player::keyPressEvent(QKeyEvent *event)
-{
-    // qDebug() << "MyRect knows you pressed a gkey" << endl;
-    if(event->key() == Qt::Key_Left)
-    {
-        // set LEFT movement to true
-        LEFT = true;
-    } else {
-        LEFT = false;
+void Player::keyPressEvent(QKeyEvent *event){
+    // move the player left and right
+    if (event->key() == Qt::Key_Left){
+        if (pos().x() > 0)
+        setPos(x()-10,y());
     }
-    if(event->key() == Qt::Key_Right)
-    {
-        // set Right movement to true
-        RIGHT = true;
-    } else {
-        RIGHT = false;
+    else if (event->key() == Qt::Key_Right){
+        if (pos().x() + 100 < 800)
+        setPos(x()+10,y());
     }
-    if(event->key() == Qt::Key_Space)
-    {
+    // shoot with the spacebar
+    else if (event->key() == Qt::Key_Space){
         // create a bullet
         Bullet * bullet = new Bullet();
-        bullet->setPos(x(), y());
+        bullet->setPos(x(),y());
         scene()->addItem(bullet);
-    }
-
-
-    if (LEFT) {
-        if (pos().x() > 0){
-            setPos(x()-10, y());
-        }
-
-    }
-    if (RIGHT) {
-        if (pos().x() + 100 < 800){
-            setPos(x()+10, y());
-        }
-
     }
 }
 
@@ -55,5 +31,4 @@ void Player::spawn(){
     // create an enemy
     Enemy * enemy = new Enemy();
     scene()->addItem(enemy);
-
 }
