@@ -44,7 +44,7 @@ Game::Game(QWidget *parent){
     music->setMedia(QUrl("qrc:/sounds/Skullbeatz_Bad_Cat.mp3"));
     // music->setMedia(QUrl("qrc:/sounds/door_knock_3x.mp3"));
     // music->setMedia(QUrl("qrc:/sounds/Explode.wav"));
-    music->setVolume(50);
+    // music->setVolume(50);
     music->play();
     show();
 }

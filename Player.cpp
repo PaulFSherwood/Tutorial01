@@ -5,7 +5,8 @@
 #include "Enemy.h"
 
 Player::Player(QGraphicsItem *parent): QGraphicsRectItem(parent){
-
+    bulletSound = new QMediaPlayer();
+    bulletSound->setMedia(QUrl("qrc:/sounds/Explode.wav"));
 }
 
 void Player::keyPressEvent(QKeyEvent *event){
@@ -24,6 +25,14 @@ void Player::keyPressEvent(QKeyEvent *event){
         Bullet * bullet = new Bullet();
         bullet->setPos(x(),y());
         scene()->addItem(bullet);
+        // play bulletsound
+        if (bulletSound->state() == QMediaPlayer::PlayingState) {
+            bulletSound->setPosition(0);
+        }
+        else if (bulletSound->state() == QMediaPlayer::StoppedState) {
+            bulletSound->play();
+        }
+
     }
 }
 
@@ -31,4 +40,14 @@ void Player::spawn(){
     // create an enemy
     Enemy * enemy = new Enemy();
     scene()->addItem(enemy);
+}
+
+QMediaPlayer *Player::getBulletSound() const
+{
+    return bulletSound;
+}
+
+void Player::setBulletSound(QMediaPlayer *value)
+{
+    bulletSound = value;
 }
