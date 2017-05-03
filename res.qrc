@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/sounds">
+        <file>Skullbeatz_Bad_Cat.mp3</file>
+        <file>door_knock_3x.mp3</file>
+        <file>Explode.wav</file>
+    </qresource>
+</RCC>

@@ -3,6 +3,7 @@
 #include <QGraphicsTextItem>
 #include <QFont>
 #include "Enemy.h"
+#include <QMediaPlayer>
 
 Game::Game(QWidget *parent){
     // create the scene
@@ -38,5 +39,12 @@ Game::Game(QWidget *parent){
     QObject::connect(timer,SIGNAL(timeout()),player,SLOT(spawn()));
     timer->start(2000);
 
+    // play background music
+    QMediaPlayer * music = new QMediaPlayer();
+    music->setMedia(QUrl("qrc:/sounds/Skullbeatz_Bad_Cat.mp3"));
+    // music->setMedia(QUrl("qrc:/sounds/door_knock_3x.mp3"));
+    // music->setMedia(QUrl("qrc:/sounds/Explode.wav"));
+    music->setVolume(50);
+    music->play();
     show();
 }
