@@ -7,13 +7,9 @@
 Player::Player(QGraphicsItem *parent): QGraphicsRectItem(parent){
     bulletSound = new QMediaPlayer();
     bulletSound->setMedia(QUrl("qrc:/sounds/Explode.wav"));
-    m_bFirstRelease = false;
-    keysPressed = 0;
 }
 
 void Player::keyPressEvent(QKeyEvent *event){
-    m_bFirstRelease = true;
-    keysPressed += event->key();
     // move the player left and right
     if (event->key() == Qt::Key_Left){
         if (pos().x() > 0)
@@ -39,13 +35,7 @@ void Player::keyPressEvent(QKeyEvent *event){
 
     }
 }
-void Player::keyReleaseEvent(QKeyEvent *event){
-    if(m_bFirstRelease) {
-        processMultiKeys(keysPressed);
-    }
-    m_bFirstRelease = false;
-    keysPressed -= event->key();
-}
+
 void Player::spawn(){
     // create an enemy
     Enemy * enemy = new Enemy();
