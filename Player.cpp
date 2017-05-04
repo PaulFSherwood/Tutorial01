@@ -7,15 +7,20 @@
 Player::Player(QGraphicsItem *parent): QGraphicsRectItem(parent){
     bulletSound = new QMediaPlayer();
     bulletSound->setMedia(QUrl("qrc:/sounds/Explode.wav"));
+    LEFT = false;
 }
 
 void Player::keyPressEvent(QKeyEvent *event){
     // move the player left and right
     if (event->key() == Qt::Key_Left){
-        if (pos().x() > 0)
-        setPos(x()-10,y());
+//        if (pos().x() > 0)
+//        setPos(x()-10,y());
+        LEFT = true;
     }
-    else if (event->key() == Qt::Key_Right){
+    if (!(event->key() == Qt::Key_Left)) {
+        LEFT = false;
+    }
+    if (event->key() == Qt::Key_Right){
         if (pos().x() + 100 < 800)
         setPos(x()+10,y());
     }
@@ -33,6 +38,10 @@ void Player::keyPressEvent(QKeyEvent *event){
             bulletSound->play();
         }
 
+    }
+    if (LEFT){
+        if (pos().x() > 0)
+        setPos(x()-10,y());
     }
 }
 

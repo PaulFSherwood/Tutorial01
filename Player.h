@@ -18,6 +18,7 @@ public slots:
     void spawn();
 private:
     QMediaPlayer *bulletSound;
+    bool LEFT;
 };
 
 #endif // PLAYER_H
