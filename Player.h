@@ -19,7 +19,9 @@ public slots:
     void spawn();
 private:
     QMediaPlayer *bulletSound;
-    bool LEFT;
+    QSet<Qt::Key> keysPressed;
+    bool m_bFirstRelease;
+    int keysPressed;
 };
 
 #endif // PLAYER_H
