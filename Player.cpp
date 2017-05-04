@@ -13,12 +13,8 @@ Player::Player(QGraphicsItem *parent): QGraphicsRectItem(parent){
 void Player::keyPressEvent(QKeyEvent *event){
     // move the player left and right
     if (event->key() == Qt::Key_Left){
-//        if (pos().x() > 0)
-//        setPos(x()-10,y());
-        LEFT = true;
-    }
-    if (!(event->key() == Qt::Key_Left)) {
-        LEFT = false;
+        if (pos().x() > 0)
+        setPos(x()-10,y());
     }
     if (event->key() == Qt::Key_Right){
         if (pos().x() + 100 < 800)
@@ -39,12 +35,10 @@ void Player::keyPressEvent(QKeyEvent *event){
         }
 
     }
-    if (LEFT){
-        if (pos().x() > 0)
-        setPos(x()-10,y());
-    }
 }
-
+void Player::keyReleaseEvent(QKeyEvent *event){
+    event = event;
+}
 void Player::spawn(){
     // create an enemy
     Enemy * enemy = new Enemy();
