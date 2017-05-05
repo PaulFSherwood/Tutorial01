@@ -31,18 +31,19 @@ void Player::keyPressEvent(QKeyEvent *event){
     // find the right key that is pressed
     switch(event->key()) {
         case Qt::Key_Left:
+            qDebug() << "keyLeft = true";
             if (pos().x() > 0) {
-                qDebug() << "keyLeft = true";
                 keyLeft = true;
                 break;
             }
         case Qt::Key_Right:
+            qDebug() << "keyRight = true";
             if (pos().x() + 100 < 800) {
                 keyRight = true;
                 break;
             }
-
         case Qt::Key_Space:
+            qDebug() << "space";
             keySpace = true;
             break;
 
@@ -76,9 +77,11 @@ void Player::keyReleaseEvent(QKeyEvent *event)
 {
     switch(event->key()) {
         case Qt::Key_Left:
+            qDebug() << "left is false";
             keyLeft = false;
             break;
         case Qt::Key_Right:
+            qDebug() << "right is false";
             keyRight = false;
             break;
         case Qt::Key_Space:
@@ -98,7 +101,7 @@ void Player::spawn(){
 }
 
 void Player::movePlayer() {
-    qDebug() << "in movePlayer";
+    qDebug() << "keyLeft: " << keyLeft << "||keyRight: " << keyRight << "||space: " << keySpace;
     if (keyLeft){
         setPos(x()-10,y());
     }
@@ -110,24 +113,24 @@ void Player::movePlayer() {
     }
 }
 
-class MyWidget : public QWidget
-{
-    Q_OBJECT
-    public:
-    MyWidget() {
-        setFocusPolicy(Qt::StrongFocus); startTimer(1000/60);
-    }
-    void keyPressEvent(QKeyEvent *e) {
-        keys[e->key()] = true; QWidget::keyPressEvent(e);
-    }
-    void keyReleaseEvent(QKeyEvent *e)
-    {
-        keys[e->key()] = false; QWidget::keyReleaseEvent(e);
-    }
-    void timerEvent(QTimerEvent *)
-    {
-        if(keys[Qt::Key_Up]) /* some game logic */;
-    }
-    private:
-    QMap<int, bool> keys;
-};
+//class MyWidget : public QWidget
+//{
+//    Q_OBJECT
+//    public:
+//    MyWidget() {
+//        setFocusPolicy(Qt::StrongFocus); startTimer(1000/60);
+//    }
+//    void keyPressEvent(QKeyEvent *e) {
+//        keys[e->key()] = true; QWidget::keyPressEvent(e);
+//    }
+//    void keyReleaseEvent(QKeyEvent *e)
+//    {
+//        keys[e->key()] = false; QWidget::keyReleaseEvent(e);
+//    }
+//    void timerEvent(QTimerEvent *)
+//    {
+//        if(keys[Qt::Key_Up]) /* some game logic */;
+//    }
+//    private:
+//    QMap<int, bool> keys;
+//};
