@@ -16,7 +16,6 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent){
 }
 
 void Player::keyPressEvent(QKeyEvent *event){
-    qDebug() << "in keyPressEvent";
     // TRYING DIFFERNT KEY PRESS EVENTS
 //    // move the player left and right
 //    if (event->key() == Qt::Key_Left){
@@ -99,6 +98,7 @@ void Player::spawn(){
 }
 
 void Player::movePlayer() {
+    qDebug() << "in movePlayer";
     if (keyLeft){
         setPos(x()-10,y());
     }
