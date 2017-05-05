@@ -9,7 +9,7 @@ extern Game * game; // there is an external global object called game
 
 Bullet::Bullet(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
     // draw graphics
-    setPixmap(QPixmap("qrc:/images/Bullet.png"));
+    setPixmap(QPixmap(":/images/Bullet.png"));
 
     // make/connect a timer to move() the bullet every so often
     QTimer * timer = new QTimer(this);
