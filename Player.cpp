@@ -109,3 +109,25 @@ void Player::movePlayer() {
         qDebug() << "space hit";
     }
 }
+
+class MyWidget : public QWidget
+{
+    Q_OBJECT
+    public:
+    MyWidget() {
+        setFocusPolicy(Qt::StrongFocus); startTimer(1000/60);
+    }
+    void keyPressEvent(QKeyEvent *e) {
+        keys[e->key()] = true; QWidget::keyPressEvent(e);
+    }
+    void keyReleaseEvent(QKeyEvent *e)
+    {
+        keys[e->key()] = false; QWidget::keyReleaseEvent(e);
+    }
+    void timerEvent(QTimerEvent *)
+    {
+        if(keys[Qt::Key_Up]) /* some game logic */;
+    }
+    private:
+    QMap<int, bool> keys;
+};
