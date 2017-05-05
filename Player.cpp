@@ -11,18 +11,47 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent){
 
     // set player graphic
     setPixmap(QPixmap(":/images/ship01.png"));
+
+    keyLeft = keyRight = keySpace = false;
 }
 
 void Player::keyPressEvent(QKeyEvent *event){
-    // move the player left and right
-    if (event->key() == Qt::Key_Left){
-        if (pos().x() > 0)
-        setPos(x()-10,y());
+    // TRYING DIFFERNT KEY PRESS EVENTS
+//    // move the player left and right
+//    if (event->key() == Qt::Key_Left){
+//        if (pos().x() > 0)
+//        setPos(x()-10,y());
+//    }
+//    if (event->key() == Qt::Key_Right){
+//        if (pos().x() + 100 < 800)
+//        setPos(x()+10,y());
+//    }
+
+
+    // find the right key that is pressed
+    switch(event->key()) {
+        case Qt::Key_Left:
+            if (pos().x() > 0) {
+                keyLeft = false;
+                return;
+            }
+            keyLeft = true;
+            break;
+        case Qt::Key_Right:
+            keyRight = true;
+            break;
+        case Qt::Key_Space:
+            keySpace = true;
+            break;
+
     }
-    if (event->key() == Qt::Key_Right){
-        if (pos().x() + 100 < 800)
-        setPos(x()+10,y());
-    }
+
+
+
+
+
+
+
     // shoot with the spacebar
     else if (event->key() == Qt::Key_Space){
         // create a bullet
@@ -38,10 +67,39 @@ void Player::keyPressEvent(QKeyEvent *event){
         }
 
     }
+    Player::keyPressEvent(event);
 }
+
+void Player::keyReleaseEvent(QKeyEvent *event)
+{
+    switch(event->key()) {
+        case Qt::Key_Left:
+            keyLeft = false;
+            break;
+        case Qt::Key_Right:
+            keyRight = false;
+            break;
+        case Qt::Key_Space:
+            keySpace = false;
+            break;
+    }
+
+    Player::keyReleaseEvent(event);
+}
+
+
 
 void Player::spawn(){
     // create an enemy
     Enemy * enemy = new Enemy();
     scene()->addItem(enemy);
+}
+
+void Player::move() {
+    if (keyLeft){
+
+    }
+    if (keyRight) {
+
+    }
 }

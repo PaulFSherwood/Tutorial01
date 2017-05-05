@@ -41,6 +41,11 @@ Game::Game(QWidget *parent){
     QObject::connect(timer,SIGNAL(timeout()),player,SLOT(spawn()));
     timer->start(2000);
 
+    // trying move timer
+    QTimer * timer2 = new QTimer();
+    QObject::connect(timer, SIGNAL(timeout()), player, SLOT(movePlayer()));
+    timer2->start(200);
+
     // play background music
     QMediaPlayer * music = new QMediaPlayer();
     music->setMedia(QUrl("qrc:/sounds/Skullbeatz_Bad_Cat.mp3"));
