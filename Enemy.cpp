@@ -14,6 +14,8 @@ Enemy::Enemy(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
 
     // drew the enemy picture
     setPixmap(QPixmap(":/images/Enemy.png"));
+    setTransformOriginPoint(5, 50);
+    setRotation(180);
 
     // make/connect a timer to move() the enemy every so often
     QTimer * timer = new QTimer(this);
