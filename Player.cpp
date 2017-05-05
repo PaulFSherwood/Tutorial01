@@ -4,9 +4,13 @@
 #include "Bullet.h"
 #include "Enemy.h"
 
-Player::Player(QGraphicsItem *parent): QGraphicsRectItem(parent){
+Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent){
+    // set bullet sound
     bulletSound = new QMediaPlayer();
     bulletSound->setMedia(QUrl("qrc:/sounds/Explode.wav"));
+
+    // set player graphic
+    setPixmap(QPixmap(":/images/ship01.png"));
 }
 
 void Player::keyPressEvent(QKeyEvent *event){
@@ -40,14 +44,4 @@ void Player::spawn(){
     // create an enemy
     Enemy * enemy = new Enemy();
     scene()->addItem(enemy);
-}
-
-QMediaPlayer *Player::getBulletSound() const
-{
-    return bulletSound;
-}
-
-void Player::setBulletSound(QMediaPlayer *value)
-{
-    bulletSound = value;
 }
