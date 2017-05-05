@@ -16,6 +16,7 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent){
 }
 
 void Player::keyPressEvent(QKeyEvent *event){
+    qDebug() << "in keyPressEvent";
     // TRYING DIFFERNT KEY PRESS EVENTS
 //    // move the player left and right
 //    if (event->key() == Qt::Key_Left){
@@ -32,14 +33,16 @@ void Player::keyPressEvent(QKeyEvent *event){
     switch(event->key()) {
         case Qt::Key_Left:
             if (pos().x() > 0) {
-                keyLeft = false;
-                return;
+                qDebug() << "keyLeft = true";
+                keyLeft = true;
+                break;
             }
-            keyLeft = true;
-            break;
         case Qt::Key_Right:
-            keyRight = true;
-            break;
+            if (pos().x() + 100 < 800) {
+                keyRight = true;
+                break;
+            }
+
         case Qt::Key_Space:
             keySpace = true;
             break;
@@ -53,7 +56,7 @@ void Player::keyPressEvent(QKeyEvent *event){
 
 
     // shoot with the spacebar
-    else if (event->key() == Qt::Key_Space){
+    if (event->key() == Qt::Key_Space){
         // create a bullet
         Bullet * bullet = new Bullet();
         bullet->setPos(x(),y());
@@ -67,7 +70,7 @@ void Player::keyPressEvent(QKeyEvent *event){
         }
 
     }
-    Player::keyPressEvent(event);
+    //Player::keyPressEvent(event);
 }
 
 void Player::keyReleaseEvent(QKeyEvent *event)
@@ -84,7 +87,7 @@ void Player::keyReleaseEvent(QKeyEvent *event)
             break;
     }
 
-    Player::keyReleaseEvent(event);
+    // Player::keyReleaseEvent(event);
 }
 
 
@@ -95,11 +98,14 @@ void Player::spawn(){
     scene()->addItem(enemy);
 }
 
-void Player::move() {
+void Player::movePlayer() {
     if (keyLeft){
-
+        setPos(x()-10,y());
     }
     if (keyRight) {
-
+        setPos(x()+10,y());
+    }
+    if (keySpace) {
+        qDebug() << "space hit";
     }
 }

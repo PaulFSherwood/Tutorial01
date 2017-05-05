@@ -12,9 +12,9 @@ public:
     Player(QGraphicsItem * parent=0);
     void keyPressEvent(QKeyEvent * event);
     void keyReleaseEvent(QKeyEvent *event);
-    void move();
 public slots:
     void spawn();
+    void movePlayer();
 private:
     QMediaPlayer * bulletSound;
     bool keyLeft;
