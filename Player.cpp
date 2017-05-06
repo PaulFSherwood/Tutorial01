@@ -78,7 +78,7 @@ void Player::keyReleaseEvent(QKeyEvent *event)
                 break;
         }
     }
-
+    movePlayer();
 }
 
 
