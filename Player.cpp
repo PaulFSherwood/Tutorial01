@@ -31,65 +31,54 @@ void Player::keyPressEvent(QKeyEvent *event){
     // find the right key that is pressed
     switch(event->key()) {
         case Qt::Key_Left:
-            qDebug() << "keyLeft = true";
-            if (pos().x() > 0) {
-                keyLeft = true;
-                break;
-            }
+            // if (pos().x() > 0) {
+            keyLeft = true;
+            break;
+            // }
         case Qt::Key_Right:
-            qDebug() << "keyRight = true";
-            if (pos().x() + 100 < 800) {
-                keyRight = true;
-                break;
-            }
+            // if (pos().x() + 100 < 800) {
+            keyRight = true;
+            break;
+            // }
         case Qt::Key_Space:
-            qDebug() << "space";
             keySpace = true;
             break;
-
     }
 
 
+//    // shoot with the spacebar
+//    if (event->key() == Qt::Key_Space){
+//        // create a bullet
+//        Bullet * bullet = new Bullet();
+//        bullet->setPos(x(),y());
+//        scene()->addItem(bullet);
+//        // play bulletsound
+//        if (bulletSound->state() == QMediaPlayer::PlayingState) {
+//            bulletSound->setPosition(0);
+//        }
+//        else if (bulletSound->state() == QMediaPlayer::StoppedState) {
+//            bulletSound->play();
+//        }
 
-
-
-
-
-    // shoot with the spacebar
-    if (event->key() == Qt::Key_Space){
-        // create a bullet
-        Bullet * bullet = new Bullet();
-        bullet->setPos(x(),y());
-        scene()->addItem(bullet);
-        // play bulletsound
-        if (bulletSound->state() == QMediaPlayer::PlayingState) {
-            bulletSound->setPosition(0);
-        }
-        else if (bulletSound->state() == QMediaPlayer::StoppedState) {
-            bulletSound->play();
-        }
-
-    }
-    //Player::keyPressEvent(event);
+//    }
 }
 
 void Player::keyReleaseEvent(QKeyEvent *event)
 {
-    switch(event->key()) {
-        case Qt::Key_Left:
-            qDebug() << "left is false";
-            keyLeft = false;
-            break;
-        case Qt::Key_Right:
-            qDebug() << "right is false";
-            keyRight = false;
-            break;
-        case Qt::Key_Space:
-            keySpace = false;
-            break;
+    if (!event->isAutoRepeat()) {
+        switch(event->key()) {
+            case Qt::Key_Left:
+                keyLeft = false;
+                break;
+            case Qt::Key_Right:
+                keyRight = false;
+                break;
+            case Qt::Key_Space:
+                keySpace = false;
+                break;
+        }
     }
 
-    // Player::keyReleaseEvent(event);
 }
 
 
@@ -101,36 +90,59 @@ void Player::spawn(){
 }
 
 void Player::movePlayer() {
-    qDebug() << "keyLeft: " << keyLeft << "||keyRight: " << keyRight << "||space: " << keySpace;
-    if (keyLeft){
-        setPos(x()-10,y());
+    if (keyLeft && keySpace) {
+        if (pos().x() > 0) {
+            setPos(x()-10,y());
+        }
+        // create a bullet
+        Bullet * bullet = new Bullet();
+        bullet->setPos(x(),y());
+        scene()->addItem(bullet);
+        // play bulletsound
+        if (bulletSound->state() == QMediaPlayer::PlayingState) {
+            bulletSound->setPosition(0);
+        }
+        else if (bulletSound->state() == QMediaPlayer::StoppedState) {
+            bulletSound->play();
+        }
     }
-    if (keyRight) {
-        setPos(x()+10,y());
+    else if (keyRight && keySpace) {
+        if (pos().x() + 100 < 800) {
+            setPos(x()+10,y());
+        }
+        // create a bullet
+        Bullet * bullet = new Bullet();
+        bullet->setPos(x(),y());
+        scene()->addItem(bullet);
+        // play bulletsound
+        if (bulletSound->state() == QMediaPlayer::PlayingState) {
+            bulletSound->setPosition(0);
+        }
+        else if (bulletSound->state() == QMediaPlayer::StoppedState) {
+            bulletSound->play();
+        }
     }
-    if (keySpace) {
-        qDebug() << "space hit";
+    else if (keyLeft) {
+        if (pos().x() > 0) {
+            setPos(x()-10,y());
+        }
+    }
+    else if (keyRight) {
+        if (pos().x() + 100 < 800) {
+            setPos(x()+10,y());
+        }
+    }
+    else if (keySpace) {
+        // create a bullet
+        Bullet * bullet = new Bullet();
+        bullet->setPos(x(),y());
+        scene()->addItem(bullet);
+        // play bulletsound
+        if (bulletSound->state() == QMediaPlayer::PlayingState) {
+            bulletSound->setPosition(0);
+        }
+        else if (bulletSound->state() == QMediaPlayer::StoppedState) {
+            bulletSound->play();
+        }
     }
 }
-
-//class MyWidget : public QWidget
-//{
-//    Q_OBJECT
-//    public:
-//    MyWidget() {
-//        setFocusPolicy(Qt::StrongFocus); startTimer(1000/60);
-//    }
-//    void keyPressEvent(QKeyEvent *e) {
-//        keys[e->key()] = true; QWidget::keyPressEvent(e);
-//    }
-//    void keyReleaseEvent(QKeyEvent *e)
-//    {
-//        keys[e->key()] = false; QWidget::keyReleaseEvent(e);
-//    }
-//    void timerEvent(QTimerEvent *)
-//    {
-//        if(keys[Qt::Key_Up]) /* some game logic */;
-//    }
-//    private:
-//    QMap<int, bool> keys;
-//};
