@@ -42,9 +42,9 @@ Game::Game(QWidget *parent){
     timer->start(2000);
 
     // trying move timer
-    // QTimer * timer2 = new QTimer();
-    // QObject::connect(timer, SIGNAL(timeout()), player, SLOT(movePlayer()));
-    // timer2->start(30);
+     QTimer * timer2 = new QTimer();
+     QObject::connect(timer2, SIGNAL(timeout()), player, SLOT(movePlayer()));
+     timer2->start(1000/33);
 
     // play background music
     QMediaPlayer * music = new QMediaPlayer();
